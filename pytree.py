@@ -1,35 +1,8 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python 3
+# -*- coding: utf-8 -*-
 import subprocess
 import sys
 import os
-'''
-def DFS(dirt, path, unicode, hasSibling):
-	if os.path.isdir(dirt) == False:
-		return ""
-	result = ""
-	listdir = os.listdir(dirt)
-	#print (listdir)
-	count = len(listdir)
-	for (i,file) in enumerate(listdir):
-		if file[0] == ".":
-			continue
-		if i == count-1:
-			result += 
-		if os.path.isdir(dirt+"/"+file):
-			if i == count-1:
-				result += DFS()
-			result += (path+unicode["notTheLast"]+file+"\n")
-			if path == "" or path[-4:] == "    " :
-				result += DFS(dirt+"/"+file, path+unicode["nextLevel1"], unicode)
-			else:
-				result += DFS(dirt+"/"+file, path+unicode["nextLevel2"], unicode)
-		else:
-			if i == count-1:
-				result += (path+unicode["theLast"]+file+"\n")
-			else:
-				result += (path+unicode["notTheLast"]+file+"\n")
-	return result
-	'''
 
 def DFS(dirt,path,result,unicodedic):
 	if os.path.isdir(dirt) == False:
@@ -55,12 +28,13 @@ def DFS(dirt,path,result,unicodedic):
 	return
 
 if __name__ == '__main__':
-	argv = ["python","."]
+	#argv = ["python","."]
+	
+	if len(sys.argv) == 1:
+		sys.argv.append(".")
 	unicodedic = {"notTheLast":u"\u251c\u2500\u2500 ", "theLast":u"\u2514\u2500\u2500 ", "nextLevel1":u"\u2502   ", "nextLevel2":"    " }
-	result = [argv[1]+"\n",-1,1]
+	result = [sys.argv[1]+"\n",-1,1]
 	path = ""
-	DFS(argv[1], path,result, unicodedic)
-	print (result[0])
+	DFS(sys.argv[1], path,result, unicodedic)
+	print (str(result[0]))
 	print (str(result[1])+" directories, "+str(result[2])+" files")
-	
-	
