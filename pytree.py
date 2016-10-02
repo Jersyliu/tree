@@ -25,6 +25,22 @@ def DFS(dirt, path, result, unicodedic):
         a = unicodedic["nextLevel1"]
 #    newpath = "{}{}".format(path, a)
     newpath = path + a
+    GOAWAY(listdir, newpath, dirt, unicodedic, path, count)
+#    for (i, filename) in enumerate(listdir):
+#        newdirt = dirt + "/" + filename
+#        if i == count - 1:
+#            b = unicodedic["theLast"]
+#            c = path + "    "
+#        else:
+#            b = unicodedic["notTheLast"]
+#            c = newpath
+#        result[0] += "{}{}".format(result[0], (path + b + filename + "\n"))
+#        result[0] += (path + b + filename + "\n")
+#        DFS(newdirt, c, result, unicodedic)
+#    return
+
+
+def GOAWAY(listdir, newpath, dirt, unicodedic, path, count):
     for (i, filename) in enumerate(listdir):
         newdirt = dirt + "/" + filename
         if i == count - 1:
@@ -36,7 +52,6 @@ def DFS(dirt, path, result, unicodedic):
 #        result[0] += "{}{}".format(result[0], (path + b + filename + "\n"))
         result[0] += (path + b + filename + "\n")
         DFS(newdirt, c, result, unicodedic)
-    return
 
 
 def func(x):
