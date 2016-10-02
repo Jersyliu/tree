@@ -19,18 +19,23 @@ def DFS(dirt, path, result, unicodedic):
     listdir = sorted(temp, key=func)
     count = len(listdir)
     result[2] += count
-    newpath = "{}{}".format(path, (unicodedic["nextLevel2"] if count == 1 else unicodedic["nextLevel1"]))
+    if count == 1:
+        a = unicodedic["nextLevel2"]
+    else:
+        a = unicodedic["nextLevel1"]
+#    newpath = "{}{}".format(path, a)
+    newpath = path + a
     for (i, filename) in enumerate(listdir):
-        newdirt = dirt + " / " + filename
-        if filename[0] == ".":
-            result[2] -= 1
-            continue
+        newdirt = dirt + "/" + filename
         if i == count - 1:
-            result[0] = "{}{}".format(result[0], (path + unicodedic["theLast"] + filename + "\n"))
-            DFS(newdirt, path + "    ", result, unicodedic)
+            b = unicodedic["theLast"]
+            c = path + "    "
         else:
-            result[0] = "{}{}".format(result[0], (path + unicodedic["notTheLast"] + filename + "\n"))
-            DFS(newdirt, newpath, result, unicodedic)
+            b = unicodedic["notTheLast"]
+            c = newpath
+#        result[0] += "{}{}".format(result[0], (path + b + filename + "\n"))
+        result[0] += (path + b + filename + "\n")
+        DFS(newdirt, c, result, unicodedic)
     return
 
 
@@ -42,11 +47,13 @@ def func(x):
         for (i, key) in enumerate(x):
             if key in string.ascii_lowercase:
                 return x[i:]
+
+
 if __name__ == '__main__':
     if len(sys.argv) == 1:
         sys.argv.append(".")
     unicodedic = {"notTheLast": "├── ", "theLast": "└── ", "nextLevel1": "│   ", "nextLevel2": "    "}
-    result = [sys.argv[1] + "\n", - 1, 1]
+    result = [sys.argv[1] + "\n", -1, 1]
     path = ""
     DFS(sys.argv[1], path, result, unicodedic)
     print(result[0])
