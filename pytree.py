@@ -49,7 +49,7 @@ def GOAWAY(listdir, newpath, dirt, unicodedic, path, count):
         else:
             b = unicodedic["notTheLast"]
             c = newpath
-#        result[0] += "{}{}".format(result[0], (path + b + filename + "\n"))
+#         result[0] += "{}{}".format(result[0], (path + b + filename + "\n"))
         result[0] += (path + b + filename + "\n")
         DFS(newdirt, c, result, unicodedic)
 
